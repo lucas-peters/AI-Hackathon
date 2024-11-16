@@ -5,7 +5,13 @@
 </script>
 
 <div class="max-w-sm rounded overflow-hidden shadow-lg">
-    <img src={image} alt="{title} Image" class="w-full" />
+    <div class="w-[300px] h-[300px]">
+        {#if image}
+            <img src={image} alt="{title} Image" class="w-full h-full" />
+        {:else}
+            <div class="w-full h-full animated-loader"></div>
+        {/if}
+    </div>
     <div class="px-4 py-4">
         <div class="font-bold text-xl mb-2">{title}</div>
         {#if body}
@@ -13,3 +19,22 @@
         {/if}
     </div>
 </div>
+
+<style>
+    .animated-loader {
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: gradientLoader;
+        animation-timing-function: linear;
+        background: #f6f7f8;
+        background: linear-gradient(
+            to right,
+            #eeeeee 8%,
+            #dddddd 18%,
+            #eeeeee 33%
+        );
+        background-size: 800px 104px;
+        position: relative;
+    }
+</style>

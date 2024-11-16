@@ -3,24 +3,37 @@
     import { Navbar } from "$lib/components/Navbar";
     import { Card } from "$lib/components/Card";
     import { Input } from "$lib/components/Input";
-    let image: string = "https://placehold.co/300";
+    let image: string = "https://picsum.photos/300";
     let body =
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque amet aliquam itaque officiis dicta, assumenda rem modi fugiat maiores, beatae perspiciatis corrupti eligendi. Obcaecati fuga, nesciunt aspernatur odio perspiciatis ab!";
+    let isLoading = false;
+    function sendPrompt(prompt: string) {
+        isLoading = true;
+        setTimeout(() => {
+            isLoading = false;
+        }, 2000);
+    }
 </script>
 
 <Navbar />
-<div class="w-full flex justify-center items-center my-16">
+<div class="w-full flex justify-center items-center mt-8">
     <h1 class="text-4xl">Welcome to Your Outfit of the Day!</h1>
 </div>
-<div class="container mx-auto flex flex-col justify-center items-center">
+<!-- Outfit of the day Section -->
+<div class="container mx-auto flex flex-col justify-center items-center mt-8">
     <div class="flex gap-3 justify-center mb-10">
-        <Card {image} title="Shirt" />
-        <Card {image} title="Pants" />
-        <Card {image} title="Shoes" />
+        <Card image={isLoading ? "" : image} title="Shirt" />
+        <Card image={isLoading ? "" : image} title="Pants" />
+        <Card image={isLoading ? "" : image} title="Shoes" />
     </div>
-    <div
-        class="fixed bottom-0 w-full flex justify-center items-center bg-violet-50 py-4"
-    >
-        <Input />
-    </div>
+</div>
+<!-- Recommendation Section -->
+<div class="container mx-auto">
+    <h3 class="text-2xl">Explore more</h3>
+</div>
+<!-- Prompt Section -->
+<div
+    class="fixed bottom-0 w-full flex justify-center items-center bg-violet-50 py-4"
+>
+    <Input onClick={sendPrompt} {isLoading} />
 </div>
