@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
+from .s3_queries import get_password
 
 views = Blueprint('views', __name__)
 
@@ -14,10 +15,10 @@ def login():
         password = request.form.get('password1')
         pass_hash = get_password(email)
         if check_password_hash(pass_hash, password):
-            flash('Logged In!', category='success')
+            print("Login Successful!")
             return redirect(url_for('views.home'))
         else:
-            flash("Email or Password does not match an existing user", category='error')
+            print("Incorrect login")
     return render_template("login.html", text="Testing")
 
 @views.route('/create_account')
