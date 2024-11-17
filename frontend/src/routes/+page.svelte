@@ -5,32 +5,10 @@
     import { Input } from "$lib/components/Input";
     import { Slider } from "$lib/components/Slider";
     import type { PageData } from "./$types";
-    import { onMount } from "svelte";
 
     let { data }: { data: PageData } = $props();
     let isLoading = $state(false);
     let recommendations: any = $state([]);
-    async function sendPrompt(prompt: string) {
-        isLoading = true;
-        let response = await fetch(`/api`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "POST, DELETE, PUT, GET",
-                "Access-Control-Allow-Headers":
-                    "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
-                "Cross-Domain": "true",
-            },
-            body: JSON.stringify({ prompt, email: data.context.user.email }),
-        });
-        let jsonResponse = await response.json();
-        console.log(jsonResponse);
-        // recommendations = jsonResponse.products;
-        isLoading = false;
-    }
-
-    console.log(data);
 </script>
 
 <div class="mb-[100px]">
@@ -70,15 +48,16 @@
         </div>
     {/if}
     <!-- Prompt Section -->
-    <div
+    <form
         class="fixed bottom-0 w-full flex justify-center items-center bg-violet-50 py-4"
+        method="POST"
     >
         <Input
-            onClick={sendPrompt}
+            name="prompt"
             {isLoading}
             withCTA
             class="w-full rounded-md border-0 py-2.5 pl-7 pr-24 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-400 sm:text-sm/6"
             placeholder="What's the occassion"
         />
-    </div>
+    </form>
 </div>

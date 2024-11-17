@@ -34,7 +34,7 @@
         <button
             class="absolute inset-y-0 right-0 flex items-center justify-center w-20 bg-violet-800 rounded-md text-white text-sm/6 font-semibold"
             aria-label="Send"
-            onclick={handleClick}
+            type="submit"
         >
             {#if isLoading}
                 <Loader />
