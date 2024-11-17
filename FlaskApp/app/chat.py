@@ -5,7 +5,7 @@ import sys
 dir = os.path.dirname(os.path.abspath(__file__))
 dir + '../../backend'
 sys.path.append(dir)
-from ...backend.prompt_processor import process_flask_request
+from backend.prompt_processor import process_flask_request
 import json
 
 chat = Blueprint('views', __name__)
