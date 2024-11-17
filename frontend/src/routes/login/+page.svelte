@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Input } from "$lib/components/Input";
+    let { form } = $props();
 </script>
 
 <div class="w-screen h-screen flex justify-center items-center gradient">
@@ -8,6 +9,13 @@
             class="w-2/5 flex flex-col justify-center items-center border-violet-900 border-2 rounded py-12 bg-white"
         >
             <h1 class="text-4xl mb-4 w-full text-center">Login</h1>
+            {#if form?.errors}
+                <div
+                    class="w-3/4 bg-red-500 text-white text-center rounded py-2 mt-4 mb-4"
+                >
+                    {form?.errors}
+                </div>
+            {/if}
             <form class="w-full flex flex-col items-center" method="POST">
                 <Input
                     name="email"

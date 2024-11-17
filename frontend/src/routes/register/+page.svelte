@@ -2,23 +2,18 @@
     import { Input } from "$lib/components/Input";
     import { onMount } from "svelte";
 
-    let getPosition = false;
-    let coords: any;
-    let Geolocation: any;
-    let geoLoading = false;
-    let geoSuccess = false;
-    let geoError: any;
-    let onMountReady = false;
-    let formEl: HTMLFormElement;
+    let getPosition = $state(false);
+    let coords: any = $state(null);
+    let Geolocation: any = $state(null);
+    let geoLoading = $state(false);
+    let geoSuccess = $state(false);
+    let geoError: any = $state(null);
+    let onMountReady = $state(false);
+
+    let { form } = $props();
 
     onMount(async () => {
         Geolocation = (await import("svelte-geolocation")).default;
-        formEl.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const formData = new FormData(formEl);
-            const data = Object.fromEntries(formData.entries());
-            console.log(data);
-        });
         onMountReady = true;
     });
 </script>
@@ -29,7 +24,14 @@
             class="w-2/5 flex flex-col justify-center items-center border-violet-900 border-2 rounded py-12 bg-white"
         >
             <h1 class="text-4xl mb-4 w-full text-center">Register</h1>
-            <form class="w-full flex flex-col items-center" bind:this={formEl}>
+            {#if form?.errors}
+                <div
+                    class="w-3/4 bg-red-500 text-white text-center rounded py-2 mt-4 mb-4"
+                >
+                    {form?.errors}
+                </div>
+            {/if}
+            <form class="w-full flex flex-col items-center" method="POST">
                 <Input
                     name="name"
                     type="text"
