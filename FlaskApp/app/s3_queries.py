@@ -59,6 +59,9 @@ def get_user(email):
     
 def get_password(email):
     return get_user['password']
+
+def get_location(email):
+    return get_user['location']
     
     
 # makes the key for the s3 bucket where we store the user data
