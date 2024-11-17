@@ -4,23 +4,14 @@ import json
 
 class RecommenderClass():
     def __init__(self):
-        self.access_key = "AKIA3G3YSRMRWN3MRXD4"
-        self.secret_key = "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"
-
         # Initialize AWS clients
         self.s3 = boto3.client(
             "s3",
-            aws_access_key_id=self.access_key,
-            aws_secret_access_key=self.secret_key,
-
             region_name="us-west-2",
         )
 
         self.bedrock = boto3.client(
             service_name="bedrock-runtime",
-            aws_access_key_id=self.access_key,
-            aws_secret_access_key=self.secret_key,
-
             region_name="us-west-2",
         )
     
