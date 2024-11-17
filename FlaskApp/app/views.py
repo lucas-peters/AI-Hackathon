@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, send_from_directory
 from werkzeug.security import generate_password_hash, check_password_hash
 from .s3_queries import get_password
 
@@ -6,7 +6,9 @@ views = Blueprint('views', __name__)
 
 @views.route('/')
 def home():
-    return render_template("home.html")
+    #return render_template('../../frontend/src/app.html')
+    return send_from_directory('client/public', 'app.html')
+    
 
 @views.route('/login', methods=['GET', "POST"])
 def login():
@@ -19,7 +21,7 @@ def login():
             return redirect(url_for('views.home'))
         else:
             print("Incorrect login")
-    return render_template("login.html", text="Testing")
+    return send_from_directory('client/public', 'login.html')
 
 @views.route('/create_account')
 def create_account():
