@@ -2,7 +2,6 @@ import { fail, redirect } from "@sveltejs/kit";
 export const actions = {
     default: async ({ request, cookies }) => {
         const data = await request.formData();
-        console.log("Form Submitted!", data);
         let { name, password, confirm_password, email, location } =
             Object.fromEntries(data);
         if (password !== confirm_password) {

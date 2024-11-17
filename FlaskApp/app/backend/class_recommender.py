@@ -106,7 +106,7 @@ class RecommenderClass():
         # print(response)
 
         response_body = json.loads(response["body"].read().decode("utf-8"))
-       
+        print('RB', response_body)
         return json.loads(response_body['content'][0]['text'])
     
     def lambda_handler(self,context:dict) -> json:
@@ -115,7 +115,7 @@ class RecommenderClass():
         bucket_name = "doojoo-clothes-data"
         user_path = f"users/{context.get('user_id')}/metadata/"
         
-        
+        print(f"Processing user input: {context}")
         try:        
             
             # Step 2: Fetch wardrobe metadata from S3

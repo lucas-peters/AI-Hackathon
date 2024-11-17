@@ -118,7 +118,7 @@ def process_flask_request(prompt: str, user_id: str, input_data: Dict[str, Any])
     #Pre-process the prompt to relevant information"""
     promptProcessor = PromptProcessor()
     data =  promptProcessor.process_prompt(prompt, user_id, input_data)
-    #print(data)
+    print("Shanaya:", data)
 
     # Get recommendations from wardrobe
     recommender_from_wadrobe = RecommenderClass()

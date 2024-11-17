@@ -13,7 +13,6 @@ export const actions = {
             credentials: "include",
         });
         if (response.ok) {
-            console.log("Response OK!");
             let jsonResponse = await response.json();
             let token = jsonResponse["access_token"];
             cookies.set("access_token", token, {

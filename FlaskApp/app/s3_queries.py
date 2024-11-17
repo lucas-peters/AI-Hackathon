@@ -20,7 +20,7 @@ def create_user(user: dict) -> (bool):
     hashed_pword = generate_password_hash(user['password'])
     user['password'] = hashed_pword
     json_data = json.dumps(user)
-    key_string = make_key_string(user['email'])
+    key_string = make_key(user['email'])
     
     try:
         s3_client.put_object(
@@ -40,7 +40,7 @@ def create_user(user: dict) -> (bool):
     
 def get_user(email: str):
     """fetches user from s3 bucket, returns None if no match found"""
-    key_string = make_key_string(email)
+    key_string = make_key(email)
     try:
         obj = s3_client.get_object(Bucket=bucket, Key=key_string)
     # handling NoSuchKey error. Tells us that this user has not been created yet
@@ -55,10 +55,12 @@ def get_password(email: str):
 def get_location(email: str):
     return get_user(email)['location']
     
-    
+def make_key(email):
+    return f"{email.replace('@', '_').replace('.', '_')}"
+
 # makes the key for the s3 bucket where we store the user data
-def make_key_string(email):
-    return f"{email.replace('@', '_').replace('.', '_')}.json"
+# def make_key_string(email):
+#     return f"{email.replace('@', '_').replace('.', '_')}.json"
 
 if __name__ == '__main__':
     user = {'name' : 'Bob', 'email' :'bob@gmail.com', 'password' : 'password', 'age' : '69', 'gender': 'M', 'location': 'Timbuktu'}
