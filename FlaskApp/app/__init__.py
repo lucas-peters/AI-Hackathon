@@ -1,8 +1,10 @@
 from flask import Flask
-from flask import login_manager
+import os
 
 def create_app():
-    app = Flask(__name__)
+    template_dir = os.path.abspath('../../frontend/src')
+    app = Flask(__name__, template_folder=template_dir)
+    app.config['SECRET_KEY'] = 'verysecurekey'
     
     from .views import views
     app.register_blueprint(views)
