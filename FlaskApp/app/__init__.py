@@ -6,8 +6,8 @@ import os
 def create_app():
     template_dir = os.path.abspath('../../frontend/src')
     app = Flask(__name__, template_folder=template_dir)
-    app.config['SECRET_KEY'] = 'verysecurekey'
-    app.config['JWT_SECRET_KEY'] = 'your_secret_key'  # Change this to a strong key
+    app.config['SECRET_KEY'] = 'KL06xVMcnZpUmnTZemJ0kivJpvDNgWig'
+    app.config['JWT_SECRET_KEY'] = '67RagpLnpshZebfmsBW0Ya9mNZfP9QaV'  # Change this to a strong key
     jwt = JWTManager(app)
     
     from .chat import chat

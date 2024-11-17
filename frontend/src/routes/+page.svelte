@@ -4,17 +4,21 @@
     import { Card } from "$lib/components/Card";
     import { Input } from "$lib/components/Input";
     import { Slider } from "$lib/components/Slider";
-    import type { PageData } from "./$types";
 
     let image: string = "https://picsum.photos/300";
-    let body =
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque amet aliquam itaque officiis dicta, assumenda rem modi fugiat maiores, beatae perspiciatis corrupti eligendi. Obcaecati fuga, nesciunt aspernatur odio perspiciatis ab!";
-    let isLoading = false;
-    function sendPrompt(prompt: string) {
+    let isLoading = $state(false);
+    let recommendations: any = $state([]);
+    async function sendPrompt(prompt: string) {
         isLoading = true;
-        setTimeout(() => {
-            isLoading = false;
-        }, 2000);
+        let response = await fetch("https://dummyjson.com/products?count=10", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        let jsonResponse = await response.json();
+        recommendations = jsonResponse.products;
+        isLoading = false;
     }
 </script>
 
@@ -28,18 +32,20 @@
         class="container mx-auto flex flex-col justify-center items-center mt-8"
     >
         <div class="flex gap-3 justify-center mb-10">
-            <Card image={isLoading ? "" : image} />
-            <Card image={isLoading ? "" : image} />
-            <Card image={isLoading ? "" : image} />
+            <Card width={250} height={250} image={isLoading ? "" : image} />
+            <Card width={250} height={250} image={isLoading ? "" : image} />
+            <Card width={250} height={250} image={isLoading ? "" : image} />
         </div>
     </div>
     <!-- Recommendation Section -->
-    <div class="container mx-auto">
-        <h3 class="text-2xl">Explore more</h3>
-    </div>
-    <div class="w-screen mt-4 px-10">
-        <Slider />
-    </div>
+    {#if recommendations.length > 0}
+        <div class="container mx-auto">
+            <h3 class="text-2xl">Explore more</h3>
+        </div>
+        <div class="w-screen mt-4 px-10">
+            <Slider data={recommendations} />
+        </div>
+    {/if}
     <!-- Prompt Section -->
     <div
         class="fixed bottom-0 w-full flex justify-center items-center bg-violet-50 py-4"

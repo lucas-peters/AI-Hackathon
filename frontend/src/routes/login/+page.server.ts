@@ -4,17 +4,14 @@ export const actions = {
     default: async ({ request, cookies }) => {
         const data = await request.formData();
         let { email, password } = Object.fromEntries(data);
-        const response = await fetch(
-            `${import.meta.env.VITE_API_URL}/auth/login`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ username: "emilys", password }),
-                credentials: "include",
-            }
-        );
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+            credentials: "include",
+        });
         if (response.ok) {
             console.log("Response OK!");
             let token = await response.json();
