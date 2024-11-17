@@ -3,7 +3,7 @@ import json
 import requests
 from datetime import datetime
 from typing import Dict, Any, Tuple
-from amazon_scraper import DoojooRecommendationSystem
+from backend.amazon_scraper import DoojooRecommendationSystem
 
 class PromptProcessor:
     def __init__(self):
