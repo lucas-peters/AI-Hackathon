@@ -134,11 +134,23 @@ class DoojooRecommendationSystem:
             # Extract relevant information from input
             processed_data = input_data["processed_data"]
             occasion = processed_data["occasion"]
-            location = processed_data["location"]
             weather = processed_data["weather"]
             
-            # Create search query
-            search_query = f"{occasion} {location} clothes {weather}"
+            # Filter out NA values and create search query dynamically
+            query_parts = []
+
+            if occasion and occasion != "NA":
+                query_parts.append(occasion)
+
+            if weather and weather != "NA":
+                query_parts.append(weather)
+
+            # Generate search query by joining valid parts with "clothes"
+            if query_parts:
+                search_query = f"{' '.join(query_parts)} clothes"
+            else:
+                search_query = "clothes"  # Default search query if all data is NA
+
             self.logger.info(f"Generated search query: {search_query}")
             
             # Get search URL
