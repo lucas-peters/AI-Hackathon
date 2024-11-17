@@ -5,13 +5,39 @@
         body = "",
         width = 250,
         height = 250,
+        class: className = "",
+        imgClass = "",
+        onClick = () => {},
+        role = "card",
     } = $props();
 </script>
 
-<div class="max-w-sm rounded overflow-hidden shadow-lg">
-    <div class="w-[{width}px] h-[{height}px]">
+<div
+    class="max-w-sm rounded overflow-hidden shadow-lg {role == 'card'
+        ? 'cursor-pointer'
+        : ''} {className}"
+    tabindex="-1"
+    onclick={() => onClick()}
+    onkeydown={(e) => {
+        if (e.key === "Enter") {
+            onClick();
+        }
+    }}
+    onkeyup={(e) => {
+        if (e.key === "Enter") {
+            onClick();
+        }
+    }}
+    aria-roledescription={role}
+    {role}
+>
+    <div style="width: {width}px; height: {height}px;">
         {#if image}
-            <img src={image} alt="{title} Image" class="w-full h-full" />
+            <img
+                src={image}
+                alt="{title} Image"
+                class="w-full h-full {imgClass}"
+            />
         {:else}
             <div class="w-full h-full animated-loader"></div>
         {/if}

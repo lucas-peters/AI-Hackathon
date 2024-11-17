@@ -5,6 +5,7 @@ export const load: PageServerLoad = async ({ cookies }) => {
     let access_token = cookies.get("access_token");
     if (access_token) {
         console.log("Access token found!");
+
         return {
             status: 200,
             context: {
@@ -13,6 +14,6 @@ export const load: PageServerLoad = async ({ cookies }) => {
         };
     } else {
         console.log("Access token not found!");
-        throw redirect(307, "/login");
+        // throw redirect(307, "/login");
     }
 };

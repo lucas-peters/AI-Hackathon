@@ -1,12 +1,12 @@
 <script lang="ts">
-    import { onMount } from "svelte";
     import { register } from "swiper/element/bundle";
     import { Card } from "$lib/components/Card";
-    import Swiper from "swiper/bundle";
 
     register();
     let swiperEl: any = null;
     let swiperObj: any = null;
+
+    let { data = [] } = $props();
 
     function prev() {
         if (swiperEl && !swiperObj) {
@@ -19,7 +19,6 @@
         if (swiperEl && !swiperObj) {
             swiperObj = swiperEl.swiper;
         }
-        console.log(swiperObj);
         swiperObj.slideNext();
     }
 </script>
@@ -48,14 +47,14 @@
         observer={true}
         loop={true}
     >
-        {#each { length: 10 } as _, i}
+        {#each data as item, i}
             <swiper-slide key={i} class="!w-auto">
                 <Card
-                    image="https://picsum.photos/100"
-                    title="Lorem Ipsum"
-                    width={100}
-                    height={100}
-                    body="$20.00"
+                    image={item.images[0]}
+                    title={item.title}
+                    width={200}
+                    height={200}
+                    body="${item.price}"
                 />
             </swiper-slide>
         {/each}

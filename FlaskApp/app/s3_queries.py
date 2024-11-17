@@ -50,10 +50,10 @@ def get_user(email: str):
     return obj['Body'].read().decode('utf-8')
     
 def get_password(email: str):
-    return get_user['password']
+    return get_user(email)['password']
 
 def get_location(email: str):
-    return get_user['location']
+    return get_user(email)['location']
     
     
 # makes the key for the s3 bucket where we store the user data
