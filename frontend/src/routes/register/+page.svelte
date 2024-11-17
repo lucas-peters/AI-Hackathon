@@ -160,4 +160,32 @@
             rgba(91, 33, 182, 1) 35%
         );
     }
+
+    input[type="radio"]:after {
+        width: 17px;
+        height: 17px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: #d1d3d1;
+        content: "";
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+    }
+
+    input[type="radio"]:checked:after {
+        width: 17px;
+        height: 17px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: #3730a3;
+        content: "";
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+    }
 </style>
