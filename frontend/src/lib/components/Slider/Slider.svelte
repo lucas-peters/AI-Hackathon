@@ -51,8 +51,10 @@
         {#each { length: 10 } as _, i}
             <swiper-slide key={i} class="!w-auto">
                 <Card
-                    image="https://picsum.photos/200"
+                    image="https://picsum.photos/100"
                     title="Lorem Ipsum"
+                    width={100}
+                    height={100}
                     body="$20.00"
                 />
             </swiper-slide>

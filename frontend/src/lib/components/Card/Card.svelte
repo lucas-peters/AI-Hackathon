@@ -1,11 +1,15 @@
 <script lang="ts">
-    export let image: string = "";
-    export let title: string = "";
-    export let body: string = "";
+    let {
+        image = "",
+        title = "",
+        body = "",
+        width = 250,
+        height = 250,
+    } = $props();
 </script>
 
 <div class="max-w-sm rounded overflow-hidden shadow-lg">
-    <div class="w-[250px] h-[250px]">
+    <div class="w-[{width}px] h-[{height}px]">
         {#if image}
             <img src={image} alt="{title} Image" class="w-full h-full" />
         {:else}
