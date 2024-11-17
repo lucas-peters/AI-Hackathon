@@ -15,7 +15,7 @@ def login():
     
     if check_password_hash(pass_hash, password):
         print("Login Successful!")
-        return login_procedure(email)
+        return get_token(email)
     else:
         print("Incorrect login")
     return jsonify({"msg": "Bad username or password"}), 401
@@ -24,28 +24,16 @@ def login():
 def create_account(methods=['POST']):
     email = request.form.get('email')
     name = request.form.get('name')
-    password1 = request.form.get('password1')
-    password2 = request.form.get('password2')
+    password = request.form.get('password1')
     age = request.form.get('age')
     gender = request.form.get('gender')
     location = request.form.get('location')
     if not create_user(name, email, password1, age, gender, location):
         return jsonify({"msg": "Email Already Exists"}), 400
-    else:
-        login_proocedure()
-    
+    return get_token(email)
 
-@auth.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    return redirect('/login')
 
-def login_procedure(email): # returns access token
+def get_token(email): # returns access token
     access_token = create_access_token(identity=email)
-    user = User(email)
-    # TODO: Login the user with login manager
-
-
     # Set the JWT as a cookie
     return jsonify(access_token=access_token), 200
