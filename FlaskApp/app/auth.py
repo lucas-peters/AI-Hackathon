@@ -1,7 +1,7 @@
 from flask import Blueprint, request, redirect, url_for, send_from_directory, make_response, jsonify
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from werkzeug.security import check_password_hash
-from s3_queries import get_password, create_user
+from .s3_queries import get_password, create_user
 import json
 
 auth = Blueprint('auth', __name__)

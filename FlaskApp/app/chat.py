@@ -1,5 +1,5 @@
 from flask import Blueprint, request, redirect, url_for, send_from_directory
-from s3_queries import get_location, make_key_string
+from .s3_queries import get_location, make_key_string
 import os
 import sys
 dir = os.path.dirname(os.path.abspath(__file__))
