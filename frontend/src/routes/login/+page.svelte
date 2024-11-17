@@ -27,7 +27,7 @@
                 >
             </form>
             <div class="w-full text-center"><h3 class="text-xl">-OR-</h3></div>
-            <a href="/register">Register</a>
+            <a href="/register" class="underline text-violet-800">Register</a>
         </div>
     </div>
 </div>

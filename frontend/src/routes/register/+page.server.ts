@@ -1,17 +1,23 @@
 import { fail, redirect } from "@sveltejs/kit";
-
 export const actions = {
     default: async ({ request, cookies }) => {
         const data = await request.formData();
-        let { email, password } = Object.fromEntries(data);
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password }),
-            credentials: "include",
-        });
+        console.log("Form Submitted!", data);
+        let { name, password, confirm_password, email, location } =
+            Object.fromEntries(data);
+        if (password !== confirm_password) {
+            return fail(422, { errors: "Passwords do not match" });
+        }
+        const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/create_account`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ name, password, email, location }),
+            }
+        );
         if (response.ok) {
             console.log("Response OK!");
             let token = await response.json();
@@ -24,7 +30,6 @@ export const actions = {
             return redirect(302, "/");
         } else {
             console.log("Fail!");
-            console.log(response);
             return fail(422, { errors: "Invalid Credentials" });
         }
     },
