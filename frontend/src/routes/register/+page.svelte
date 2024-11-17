@@ -3,7 +3,11 @@
     import { onMount } from "svelte";
 
     let getPosition = false;
+    let coords: any;
     let Geolocation: any;
+    let geoLoading = false;
+    let geoSuccess = false;
+    let geoError: any;
     let onMountReady = false;
     let formEl: HTMLFormElement;
 
@@ -31,24 +35,30 @@
                     type="text"
                     placeholder="Name"
                     class="w-full mb-2 rounded"
+                    required
                 />
                 <Input
                     name="email"
                     type="email"
                     placeholder="Email"
                     class="w-full mb-2 rounded"
+                    required
                 />
                 <Input
                     name="password"
                     type="password"
                     placeholder="Password"
                     class="w-full mb-2 rounded"
+                    minlength={6}
+                    required
                 />
                 <Input
                     name="confirm_password"
                     type="password"
                     placeholder="Confirm Password"
                     class="w-full mb-2 rounded"
+                    minlength={6}
+                    required
                 />
                 <div class="container flex w-3/4 justify-between items-center">
                     <div class="flex justify-center items-center">
@@ -57,6 +67,7 @@
                             name="gender"
                             id="male"
                             value="male"
+                            required
                         />
                         <label for="male" class="ml-3">Male</label>
                     </div>
@@ -73,41 +84,52 @@
                         <input
                             type="radio"
                             name="gender"
-                            id="prefer_not_to_say"
-                            value="prefer_not_to_say"
+                            id="other"
+                            value="other"
                         />
-                        <label for="prefer_not_to_say" class="ml-3"
-                            >Prefer not to say</label
-                        >
+                        <label for="other" class="ml-3">Other</label>
                     </div>
                 </div>
-                <button
-                    class="w-3/4 bg-violet-800 text-white rounded py-2 mt-4"
-                    onclick={() => (getPosition = true)}
+                <div
+                    class="w-3/4 bg-violet-800 text-white text-center rounded py-2 mt-4"
+                    onclick={(e) => {
+                        console.log("Detect Location!");
+                        e.preventDefault();
+                        getPosition = true;
+                    }}
+                    role="button"
+                    tabindex="0"
+                    onkeydown={(e) => {
+                        if (e.key === "Enter") {
+                            getPosition = true;
+                        }
+                    }}
                 >
-                    Detect Location
-                </button>
+                    {#if geoLoading}
+                        Detecting Location...
+                    {:else if geoSuccess}
+                        Location Detected
+                    {:else}
+                        Detect Location
+                    {/if}
+                </div>
+                <input
+                    class="hidden"
+                    type="text"
+                    name="location"
+                    value={coords}
+                />
                 {#if onMountReady}
                     <Geolocation
                         {getPosition}
-                        let:coords
-                        let:loading
-                        let:success
-                        let:error
+                        bind:coords
+                        bind:loading={geoLoading}
+                        bind:success={geoSuccess}
+                        bind:error={geoError}
                         let:notSupported
                     >
                         {#if notSupported}
                             Your browser does not support the Geolocation API.
-                        {:else}
-                            {#if loading}
-                                Loading...
-                            {/if}
-                            {#if success}
-                                {JSON.stringify(coords)}
-                            {/if}
-                            {#if error}
-                                An error occurred. {error.code} {error.message}
-                            {/if}
                         {/if}
                     </Geolocation>
                 {/if}
@@ -116,8 +138,14 @@
                     type="submit">Register</button
                 >
             </form>
-            <div class="w-full text-center"><h3 class="text-xl">-OR-</h3></div>
-            <a href="/login">Login</a>
+            <div class="w-full text-center mt-4">
+                <h3 class="text-xl">-OR-</h3>
+            </div>
+            <a
+                href="/login"
+                class="w-3/4 bg-violet-800 text-white rounded py-2 mt-4 p-4 text-center"
+                >Login</a
+            >
         </div>
     </div>
 </div>

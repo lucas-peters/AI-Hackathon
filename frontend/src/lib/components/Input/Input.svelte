@@ -10,6 +10,8 @@
         name = "",
         class: className = "",
         type = "text",
+        required = false,
+        minlength = 0,
     } = $props();
 
     function handleClick() {
@@ -19,7 +21,15 @@
 </script>
 
 <div class="relative w-3/4">
-    <input bind:value {name} {type} {placeholder} class={className} />
+    <input
+        bind:value
+        {name}
+        {type}
+        {placeholder}
+        class={className}
+        {required}
+        {minlength}
+    />
     {#if withCTA}
         <button
             class="absolute inset-y-0 right-0 flex items-center justify-center w-20 bg-violet-800 rounded-md text-white text-sm/6 font-semibold"
