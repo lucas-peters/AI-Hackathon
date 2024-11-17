@@ -116,6 +116,8 @@
                     type="submit">Register</button
                 >
             </form>
+            <div class="w-full text-center"><h3 class="text-xl">-OR-</h3></div>
+            <a href="/login">Login</a>
         </div>
     </div>
 </div>

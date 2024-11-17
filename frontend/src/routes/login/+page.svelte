@@ -1,15 +1,5 @@
 <script lang="ts">
     import { Input } from "$lib/components/Input";
-    import { onMount } from "svelte";
-    let formEl: HTMLFormElement;
-    onMount(() => {
-        formEl.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const formData = new FormData(formEl);
-            const data = Object.fromEntries(formData.entries());
-            console.log(data);
-        });
-    });
 </script>
 
 <div class="w-screen h-screen flex justify-center items-center gradient">
@@ -18,7 +8,7 @@
             class="w-2/5 flex flex-col justify-center items-center border-violet-900 border-2 rounded py-12 bg-white"
         >
             <h1 class="text-4xl mb-4 w-full text-center">Login</h1>
-            <form class="w-full flex flex-col items-center" bind:this={formEl}>
+            <form class="w-full flex flex-col items-center" method="POST">
                 <Input
                     name="email"
                     type="email"
@@ -36,6 +26,8 @@
                     type="submit">Login</button
                 >
             </form>
+            <div class="w-full text-center"><h3 class="text-xl">-OR-</h3></div>
+            <a href="/register">Register</a>
         </div>
     </div>
 </div>
