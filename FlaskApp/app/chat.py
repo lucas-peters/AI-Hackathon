@@ -12,8 +12,8 @@ import json
 chat = Blueprint('views', __name__)
 model_return = {}
 
-@chat.route('/')
-def home(methods = ['GET', 'POST']):
+@chat.route('/', methods = ['GET', 'POST'])
+def home():
     # check if user is logged_in
     # if not, redirect to login page
     if request.method == 'POST':
