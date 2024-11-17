@@ -21,21 +21,29 @@
         class="container mx-auto flex flex-col justify-center items-center mt-8"
     >
         <div class="flex gap-3 justify-center mb-10">
-            <Card
-                width={250}
-                height={250}
-                image={isLoading ? "" : data.context.outfit.top.filename}
-            />
-            <Card
-                width={250}
-                height={250}
-                image={isLoading ? "" : data.context.outfit.bottom.filename}
-            />
-            <Card
-                width={250}
-                height={250}
-                image={isLoading ? "" : data.context.outfit.footwear.filename}
-            />
+            {#if data.context.outfit.top}
+                <Card
+                    width={250}
+                    height={250}
+                    image={isLoading ? "" : data.context.outfit.top.filename}
+                />
+            {/if}
+            {#if data.context.outfit.bottom}
+                <Card
+                    width={250}
+                    height={250}
+                    image={isLoading ? "" : data.context.outfit.bottom.filename}
+                />
+            {/if}
+            {#if data.context.outfit.footwear}
+                <Card
+                    width={250}
+                    height={250}
+                    image={isLoading
+                        ? ""
+                        : data.context.outfit.footwear.filename}
+                />
+            {/if}
         </div>
     </div>
     <!-- Recommendation Section -->
