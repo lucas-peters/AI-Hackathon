@@ -3,6 +3,7 @@
     import { Navbar } from "$lib/components/Navbar";
     import { Card } from "$lib/components/Card";
     import { Input } from "$lib/components/Input";
+    import { Slider } from "$lib/components/Slider";
     let image: string = "https://picsum.photos/300";
     let body =
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque amet aliquam itaque officiis dicta, assumenda rem modi fugiat maiores, beatae perspiciatis corrupti eligendi. Obcaecati fuga, nesciunt aspernatur odio perspiciatis ab!";
@@ -22,14 +23,17 @@
 <!-- Outfit of the day Section -->
 <div class="container mx-auto flex flex-col justify-center items-center mt-8">
     <div class="flex gap-3 justify-center mb-10">
-        <Card image={isLoading ? "" : image} title="Shirt" />
-        <Card image={isLoading ? "" : image} title="Pants" />
-        <Card image={isLoading ? "" : image} title="Shoes" />
+        <Card image={isLoading ? "" : image} />
+        <Card image={isLoading ? "" : image} />
+        <Card image={isLoading ? "" : image} />
     </div>
 </div>
 <!-- Recommendation Section -->
 <div class="container mx-auto">
     <h3 class="text-2xl">Explore more</h3>
+</div>
+<div class="w-screen mt-4 px-10">
+    <Slider />
 </div>
 <!-- Prompt Section -->
 <div

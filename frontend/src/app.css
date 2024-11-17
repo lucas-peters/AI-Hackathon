@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    margin-bottom: 100px;
+}
+
 @keyframes gradientLoader {
     0% {
         background-position: -468px 0

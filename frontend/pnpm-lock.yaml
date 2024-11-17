@@ -11,6 +11,9 @@ importers:
       '@tailwindcss/forms':
         specifier: ^0.5.9
         version: 0.5.9(tailwindcss@3.4.15)
+      swiper:
+        specifier: ^11.1.14
+        version: 11.1.14
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^3.0.0
@@ -862,6 +865,10 @@ packages:
     resolution: {integrity: sha512-eHIJRcvA6iuXdRGMESTmBtWTQCcCiol4gyH9DA60ybS35W1x27cvtbndNvWDqX72blyf+AYeQ4gzZ0XGg3L8sw==}
     engines: {node: '>=18'}
 
+  swiper@11.1.14:
+    resolution: {integrity: sha512-VbQLQXC04io6AoAjIUWuZwW4MSYozkcP9KjLdrsG/00Q/yiwvhz9RQyt0nHXV10hi9NVnDNy1/wv7Dzq1lkOCQ==}
+    engines: {node: '>= 4.7.0'}
+
   tailwindcss@3.4.15:
     resolution: {integrity: sha512-r4MeXnfBmSOuKUWmXe6h2CcyfzJCEk4F0pptO5jlnYSIViUkVmsawj80N5h2lO3gwcmSb4n3PuN+e+GC1Guylw==}
     engines: {node: '>=14.0.0'}
@@ -1671,6 +1678,8 @@ snapshots:
       locate-character: 3.0.0
       magic-string: 0.30.12
       zimmerframe: 1.1.2
+
+  swiper@11.1.14: {}
 
   tailwindcss@3.4.15:
     dependencies:
