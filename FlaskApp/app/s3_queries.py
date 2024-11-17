@@ -11,24 +11,16 @@ s3_client = boto3.client('s3')
 s3 = boto3.resource('s3')
 bucket = 'doojoo-user-data'
 
-def create_user(name, email, password, age, gender, location) -> (bool):
-    user = {}
+def create_user(user: dict) -> (bool):
     
-    if get_user(email) != None:
+    if get_user(user['email']) != None:
         print("User with this email already exists")
         return False
         
-    hashed_pword = generate_password_hash(password)
-    user['name'] = name
+    hashed_pword = generate_password_hash(user['password'])
     user['password'] = hashed_pword
-    user['email'] = email
-    user['age'] = age
-    user['gender'] = gender
-    user['location'] = location
-    
     json_data = json.dumps(user)
-    
-    key_string = make_key_string(email)
+    key_string = make_key_string(user['email'])
     
     try:
         s3_client.put_object(
@@ -46,7 +38,7 @@ def create_user(name, email, password, age, gender, location) -> (bool):
         return False
     return True
     
-def get_user(email):
+def get_user(email: str):
     """fetches user from s3 bucket, returns None if no match found"""
     key_string = make_key_string(email)
     try:
@@ -57,10 +49,10 @@ def get_user(email):
     
     return obj['Body'].read().decode('utf-8')
     
-def get_password(email):
+def get_password(email: str):
     return get_user['password']
 
-def get_location(email):
+def get_location(email: str):
     return get_user['location']
     
     
@@ -69,8 +61,9 @@ def make_key_string(email):
     return f"{email.replace('@', '_').replace('.', '_')}.json"
 
 if __name__ == '__main__':
-    #create_user('lucas', 'lucas@gmail.com', 'password', '25', 'M', 'Santa Clara, CA')
-    get_user('lucas@gmail.com')
+    user = {'name' : 'Bob', 'email' :'bob@gmail.com', 'password' : 'password', 'age' : '69', 'gender': 'M', 'location': 'Timbuktu'}
+    create_user(user)
+    get_user('bob@gmail.com')
     
 
 # This is for us to upload locally

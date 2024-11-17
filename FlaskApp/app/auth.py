@@ -5,32 +5,31 @@ from .s3_queries import get_password, create_user
 from flask_login import login_required
 from . import login_manager
 from user import User
+import json
 
 auth = Blueprint('auth', __name__)
 @auth.route('/login', methods=["POST"])
 def login():
-    email = request.form.get('email')
-    password = request.form.get('password1')
-    pass_hash = get_password(email)
+    json_req = request.get_json()
+    req = json.loads(json_req)
+
+    pass_hash = get_password(req['email'])
     
-    if check_password_hash(pass_hash, password):
+    if check_password_hash(pass_hash, req['password']):
         print("Login Successful!")
-        return get_token(email)
+        return get_token(req['email'])
     else:
         print("Incorrect login")
     return jsonify({"msg": "Bad username or password"}), 401
 
 @auth.route('/create_account')
 def create_account(methods=['POST']):
-    email = request.form.get('email')
-    name = request.form.get('name')
-    password = request.form.get('password1')
-    age = request.form.get('age')
-    gender = request.form.get('gender')
-    location = request.form.get('location')
-    if not create_user(name, email, password1, age, gender, location):
+    json_req = request.get_json()
+    req = json.loads(json_req)
+    
+    if not create_user(req):
         return jsonify({"msg": "Email Already Exists"}), 400
-    return get_token(email)
+    return get_token(req['email'])
 
 
 def get_token(email): # returns access token

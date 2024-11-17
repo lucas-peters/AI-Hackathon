@@ -14,9 +14,9 @@ def create_app():
     jwt = JWTManager(app)
     login_manager.init_app(app)
     
-    from .views import views
+    from .chat import chat
     from .auth import auth
-    app.register_blueprint(views)
+    app.register_blueprint(chat)
     app.register_blueprint(auth)
     
     return app
