@@ -61,7 +61,7 @@ class RecommenderClass():
     def recommend_clothes(self,context: dict, filtered_metadata) -> json:
         """Generate clothing recommendations using Llama 3.2."""
         prompt = f"""
-        Based on the following inputs, please recommend suitable clothing items:
+        A user is looking for help to choose an outfit based on the following inputs, please recommend suitable clothing items:
 
                 Occasion: {context.get('occasion', 'unknown')}
                 weather: {context.get('weather', 'unknown')}
@@ -73,15 +73,16 @@ class RecommenderClass():
                 Wardrobe Metadata:
                 {json.dumps(filtered_metadata)}
                 
-                In only amoung the above data about warddrobe 
-                
+                Use only the above data about his/her wardrobe.                 
                 
                 Please pick one top wear(shirt, tops, etc), one bottom wear(pants, skirts, etc) and one footwear (shoes, high heels, etc) and
                 respond in JSON format with the following fields and nothing else!:            
                 - reason: (a brief explanation of why this item is recommended)
                 - filename: if you picked an item, get the "filename" value of that item
+               
                 
-                If there are no apropriate clothes, reply with a null or none value.
+                Strictly adhere to the json format and If the user does not have the appropriate attire for the occasion, return a null or none
+                which lets the user know they need to buy new clothes
                 
                             
         """
@@ -91,7 +92,7 @@ class RecommenderClass():
         request_body = json.dumps({
             "anthropic_version": "bedrock-2023-05-31",
             "max_tokens": 300,
-            "temperature": 0.7,
+            "temperature": 0.9,
             "messages": [
                 {"role": "user", "content": prompt}
             ]
@@ -143,7 +144,9 @@ class RecommenderClass():
 
 
 
-context = {'user_id': 'test_user_123', 'prompt': 'Going to a beach party in Miami tomorrow afternoon', 'processed_data': {'time': 'afternoon', 'date': 'tomorrow', 'location': 'Miami', 'occasion': 'beach party', 'weather': 'warm and sunny', 'additional_data': 'Beach party attire like swimwear, cover-ups, sandals, sunglasses, and sun protection would be appropriate.'}}
+# context = {'user_id': 'test_user_123', 'prompt': 'Going to a beach party in Miami tomorrow afternoon', 'processed_data': {'time': 'afternoon', 'date': 'tomorrow', 'location': 'Miami', 'occasion': 'beach party', 'weather': 'warm and sunny', 'additional_data': 'Beach party attire like swimwear, cover-ups, sandals, sunglasses, and sun protection would be appropriate.'}}
+context = {'user_id': 'test_user_123', 'prompt': 'Going to a diwali function', 'processed_data': {'time': 'afternoon', 'date': 'tomorrow', 'location': 'california', 'occasion': 'Indian-festival diwali', 'weather': 'warm evening', 'additional_data': ''}}
+# context = {'user_id': 'test_user_123', 'prompt': 'Going to space', 'processed_data': {'time': 'day', 'date': 'in 10 days', 'location': 'space', 'occasion': 'flying to space', 'weather': 'space harsh cold', 'additional_data': ''}}
 rc = RecommenderClass()
 print(rc.lambda_handler(context))
         
