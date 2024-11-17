@@ -112,7 +112,7 @@ class RecommenderClass():
         # Example user input
         # user_input = event["user_input"]
         bucket_name = "doojoo-clothes-data"
-        user_path = "users/test_user_123/metadata/"
+        user_path = f"users/{context.get('user_id')}/metadata/"
         
         
         try:        
