@@ -32,4 +32,4 @@ def home(methods = ['GET', 'POST']):
     
 
 def test_process_flask_request(prompt, user_id, req):
-    return process_flask_request(prompt,user_id, req)
+    return process_flask_request(prompt,user_id, req)[0], process_flask_request(prompt,user_id, req)[1]

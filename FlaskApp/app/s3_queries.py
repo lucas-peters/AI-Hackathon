@@ -47,7 +47,7 @@ def get_user(email: str):
     except ClientError as e:
         return None
     
-    return obj['Body'].read().decode('utf-8')
+    return json.loads(obj['Body'].read().decode('utf-8'))
     
 def get_password(email: str):
     return get_user(email)['password']

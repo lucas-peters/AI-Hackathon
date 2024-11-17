@@ -17,8 +17,8 @@ def login():
         print("Incorrect login")
     return jsonify({"msg": "Bad username or password"}), 401
 
-@auth.route('/create_account')
-def create_account(methods=['POST']):
+@auth.route('/create_account', methods=['POST'])
+def create_account():
     req = request.get_json()
     
     if not create_user(req):
