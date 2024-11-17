@@ -4,6 +4,8 @@
     import { Card } from "$lib/components/Card";
     import { Input } from "$lib/components/Input";
     import { Slider } from "$lib/components/Slider";
+    import type { PageData } from "./$types";
+
     let image: string = "https://picsum.photos/300";
     let body =
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque amet aliquam itaque officiis dicta, assumenda rem modi fugiat maiores, beatae perspiciatis corrupti eligendi. Obcaecati fuga, nesciunt aspernatur odio perspiciatis ab!";
