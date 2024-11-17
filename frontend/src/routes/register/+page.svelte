@@ -153,14 +153,6 @@
 </div>
 
 <style>
-    .gradient {
-        background: linear-gradient(
-            50deg,
-            rgba(245, 243, 255, 1) 0%,
-            rgba(91, 33, 182, 1) 35%
-        );
-    }
-
     input[type="radio"]:after {
         width: 17px;
         height: 17px;

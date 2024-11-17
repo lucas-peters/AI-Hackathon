@@ -1,18 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
+}
+
+.gradient {
+    background: linear-gradient(
+        50deg,
+        rgba(245, 243, 255, 1) 0%,
+        rgba(91, 33, 182, 1) 35%
+    );
 }
 
 @keyframes gradientLoader {
     0% {
-        background-position: -468px 0
+        background-position: -468px 0;
     }
     100% {
-        background-position: 468px 0
+        background-position: 468px 0;
     }
 }
 
