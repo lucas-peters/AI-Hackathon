@@ -23,6 +23,7 @@ def home(methods = ['GET', 'POST']):
         req.pop('prompt', None)
         req.pop('email', None)
         model_return = process_flask_request(prompt, user_id, req)
+        return model_return[1].json_dumps()
     
     if request.method == 'GET':
         pass
