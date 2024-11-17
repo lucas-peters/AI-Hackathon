@@ -167,7 +167,7 @@ if __name__ == "__main__":
     # Sample input data
     input_data = {
         "user_id": "test_user_123",
-        "prompt": "Going to a beach party in Miami tomorrow afternoon",
+        "prompt": "Going to a the casino",
         "processed_data": {
             "time": "afternoon",
             "date": "tomorrow",
