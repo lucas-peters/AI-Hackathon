@@ -39,13 +39,3 @@
         </div>
     </div>
 </div>
-
-<style>
-    .gradient {
-        background: linear-gradient(
-            50deg,
-            rgba(245, 243, 255, 1) 0%,
-            rgba(91, 33, 182, 1) 35%
-        );
-    }
-</style>

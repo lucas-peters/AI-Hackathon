@@ -7,13 +7,15 @@ dir + '../../backend'
 sys.path.append(dir)
 from s3_queries import make_key_string
 from backend.prompt_processor import process_flask_request
+from flask_cors import cross_origin
 import json
 
 chat = Blueprint('views', __name__)
 model_return = {}
 
-@chat.route('/')
-def home(methods = ['GET', 'POST']):
+@chat.route('/', methods = ['POST'])
+@cross_origin()
+def home():
     # check if user is logged_in
     # if not, redirect to login page
     if request.method == 'POST':
@@ -23,7 +25,9 @@ def home(methods = ['GET', 'POST']):
         req.pop('prompt', None)
         req.pop('email', None)
         model_return = process_flask_request(prompt, user_id, req)
-        json_data = model_return[0].append(model_return[1])
+        json_model_return_0 = json.loads(model_return[0])
+        json_model_return_1 = json.loads(model_return[1])
+        json_data = {**json_model_return_0, **json_model_return_1}
         return json_data
     
     if request.method == 'GET':

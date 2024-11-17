@@ -14,7 +14,8 @@ export const actions = {
         });
         if (response.ok) {
             console.log("Response OK!");
-            let token = await response.json();
+            let jsonResponse = await response.json();
+            let token = jsonResponse["access_token"];
             cookies.set("access_token", token, {
                 path: "/",
                 httpOnly: true,
