@@ -28,11 +28,14 @@ export const load: PageServerLoad = async ({ cookies }) => {
                 return error(response.status);
             }
             let jsonResponse = await response.json();
-            console.log("Response:", jsonResponse);
             return {
                 status: 200,
                 context: {
-                    user: { access_token },
+                    user: {
+                        access_token,
+                        email: (decoded as jwt.JwtPayload).sub,
+                    },
+                    outfit: jsonResponse.body,
                 },
             };
         } catch (error) {

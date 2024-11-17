@@ -4,22 +4,33 @@
     import { Card } from "$lib/components/Card";
     import { Input } from "$lib/components/Input";
     import { Slider } from "$lib/components/Slider";
+    import type { PageData } from "./$types";
+    import { onMount } from "svelte";
 
-    let image: string = "https://picsum.photos/300";
+    let { data }: { data: PageData } = $props();
     let isLoading = $state(false);
     let recommendations: any = $state([]);
     async function sendPrompt(prompt: string) {
         isLoading = true;
-        let response = await fetch("https://dummyjson.com/products?count=10", {
-            method: "GET",
+        let response = await fetch(`/api`, {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "POST, DELETE, PUT, GET",
+                "Access-Control-Allow-Headers":
+                    "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
+                "Cross-Domain": "true",
             },
+            body: JSON.stringify({ prompt, email: data.context.user.email }),
         });
         let jsonResponse = await response.json();
-        recommendations = jsonResponse.products;
+        console.log(jsonResponse);
+        // recommendations = jsonResponse.products;
         isLoading = false;
     }
+
+    console.log(data);
 </script>
 
 <div class="mb-[100px]">
@@ -32,9 +43,21 @@
         class="container mx-auto flex flex-col justify-center items-center mt-8"
     >
         <div class="flex gap-3 justify-center mb-10">
-            <Card width={250} height={250} image={isLoading ? "" : image} />
-            <Card width={250} height={250} image={isLoading ? "" : image} />
-            <Card width={250} height={250} image={isLoading ? "" : image} />
+            <Card
+                width={250}
+                height={250}
+                image={isLoading ? "" : data.context.outfit.top.filename}
+            />
+            <Card
+                width={250}
+                height={250}
+                image={isLoading ? "" : data.context.outfit.bottom.filename}
+            />
+            <Card
+                width={250}
+                height={250}
+                image={isLoading ? "" : data.context.outfit.footwear.filename}
+            />
         </div>
     </div>
     <!-- Recommendation Section -->
