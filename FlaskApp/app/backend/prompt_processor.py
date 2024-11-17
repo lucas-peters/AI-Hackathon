@@ -3,6 +3,7 @@ import json
 import requests
 from datetime import datetime
 from typing import Dict, Any, Tuple
+from amazon_scraper import DoojooRecommendationSystem
 
 class PromptProcessor:
     def __init__(self):
@@ -110,13 +111,29 @@ class PromptProcessor:
                 }
             }
 
+"""Lucas Call's this API"""
 def process_flask_request(prompt: str, user_id: str, input_data: Dict[str, Any]) -> Dict[str, Any]:
     """Handle incoming Flask requests"""
-    processor = PromptProcessor()
-    return processor.process_prompt(prompt, user_id, input_data)
+    #Pre-process the prompt to relevant information"""
+    promptProcessor = PromptProcessor()
+    data =  promptProcessor.process_prompt(prompt, user_id, input_data)
+    #print(data)
 
+    # Get recommendations from wardrobe
+    wardrobe_recommendations = json.dumps({})
+    buying_recommendations = json.dumps({})
+
+    if prompt.strip():
+        # Get recommendations to buy
+        recommender_to_buy = DoojooRecommendationSystem()
+        buying_recommendations = json.dumps(recommender_to_buy.get_recommendations(data), indent=2)
+        #print(json.dumps(buying_recommendations, indent=2))
+
+    return wardrobe_recommendations, buying_recommendations
+
+
+"""Sample Test"""
 if __name__ == "__main__":
-    # Test the processor
     sample_prompt = "Going to a beach party in Miami tomorrow afternoon"
     sample_user_id = "test_user_123"
     sample_input_data = {
