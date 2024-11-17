@@ -7,9 +7,7 @@ import json
 auth = Blueprint('auth', __name__)
 @auth.route('/login', methods=["POST"])
 def login():
-    json_req = request.get_json()
-    req = json.loads(json_req)
-
+    req = request.get_json()
     pass_hash = get_password(req['email'])
     
     if check_password_hash(pass_hash, req['password']):
@@ -21,8 +19,7 @@ def login():
 
 @auth.route('/create_account')
 def create_account(methods=['POST']):
-    json_req = request.get_json()
-    req = json.loads(json_req)
+    req = request.get_json()
     
     if not create_user(req):
         return jsonify({"msg": "Email Already Exists"}), 400

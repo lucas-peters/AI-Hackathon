@@ -15,10 +15,9 @@ def home(methods = ['GET', 'POST']):
     # check if user is logged_in
     # if not, redirect to login page
     if request.method == 'POST':
-        json_req = request.get_json()
-        req = json.loads(json_req)
+        req = request.get_json()
         
-        process_flask_request(req)
+        #process_flask_request(req)
     
     if request.method == 'GET':
         pass
