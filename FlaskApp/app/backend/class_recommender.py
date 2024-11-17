@@ -145,8 +145,8 @@ class RecommenderClass():
 
 
 # context = {'user_id': 'test_user_123', 'prompt': 'Going to a beach party in Miami tomorrow afternoon', 'processed_data': {'time': 'afternoon', 'date': 'tomorrow', 'location': 'Miami', 'occasion': 'beach party', 'weather': 'warm and sunny', 'additional_data': 'Beach party attire like swimwear, cover-ups, sandals, sunglasses, and sun protection would be appropriate.'}}
-context = {'user_id': 'test_user_123', 'prompt': 'Going to a diwali function', 'processed_data': {'time': 'afternoon', 'date': 'tomorrow', 'location': 'california', 'occasion': 'Indian-festival diwali', 'weather': 'warm evening', 'additional_data': ''}}
+# context = {'user_id': 'test_user_123', 'prompt': 'Going to a diwali function', 'processed_data': {'time': 'afternoon', 'date': 'tomorrow', 'location': 'california', 'occasion': 'Indian-festival diwali', 'weather': 'warm evening', 'additional_data': ''}}
 # context = {'user_id': 'test_user_123', 'prompt': 'Going to space', 'processed_data': {'time': 'day', 'date': 'in 10 days', 'location': 'space', 'occasion': 'flying to space', 'weather': 'space harsh cold', 'additional_data': ''}}
-rc = RecommenderClass()
-print(rc.lambda_handler(context))
+# rc = RecommenderClass()
+# print(rc.lambda_handler(context))
         

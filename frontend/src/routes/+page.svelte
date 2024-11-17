@@ -5,10 +5,12 @@
     import { Input } from "$lib/components/Input";
     import { Slider } from "$lib/components/Slider";
     import type { PageData } from "./$types";
+    import { onMount } from "svelte";
 
     let { data }: { data: PageData } = $props();
     let isLoading = $state(false);
     let recommendations: any = $state([]);
+    console.log(data);
 </script>
 
 <div class="mb-[100px]">
@@ -21,29 +23,21 @@
         class="container mx-auto flex flex-col justify-center items-center mt-8"
     >
         <div class="flex gap-3 justify-center mb-10">
-            {#if data.context.outfit.top}
-                <Card
-                    width={250}
-                    height={250}
-                    image={isLoading ? "" : data.context.outfit.top.filename}
-                />
-            {/if}
-            {#if data.context.outfit.bottom}
-                <Card
-                    width={250}
-                    height={250}
-                    image={isLoading ? "" : data.context.outfit.bottom.filename}
-                />
-            {/if}
-            {#if data.context.outfit.footwear}
-                <Card
-                    width={250}
-                    height={250}
-                    image={isLoading
-                        ? ""
-                        : data.context.outfit.footwear.filename}
-                />
-            {/if}
+            <Card
+                width={250}
+                height={250}
+                image={data.context.outfit.top?.filename}
+            />
+            <Card
+                width={250}
+                height={250}
+                image={data.context.outfit.bottom?.filename}
+            />
+            <Card
+                width={250}
+                height={250}
+                image={data.context.outfit.footwear?.filename}
+            />
         </div>
     </div>
     <!-- Recommendation Section -->
